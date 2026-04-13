@@ -139,7 +139,6 @@ def run_download(job_id, url, format_choice, format_id, t):
     cmd.append(url)
 
     try:
-<<<<<<< HEAD
         # Use Popen for real-time progress parsing
         process = subprocess.Popen(
             cmd,
@@ -175,17 +174,6 @@ def run_download(job_id, url, format_choice, format_id, t):
         process.wait(timeout=DOWNLOAD_TIMEOUT)
 
         if process.returncode != 0:
-=======
-        result = run_ytdlp(cmd, url=url, timeout=300)
-        if result.returncode != 0:
-            last_error = result.stderr.strip().split("\n")[-1]
-            if YOUTUBE_BOT_ERROR_TEXT in result.stderr:
-                last_error = (
-                    "YouTube blocked this request. "
-                    "Try again with cookies. "
-                    "Set YTDLP_COOKIES_FILE or YTDLP_COOKIES_FROM_BROWSER."
-                )
->>>>>>> 56b4b34 (Merge pull request #6 from rakibulism/codex/analyze-and-fix-function_invocation_failed-error)
             job["status"] = "error"
             # Use the most informative error line
             if last_error_lines:
@@ -320,11 +308,7 @@ def get_info():
     if os.path.isfile(COOKIES_FILE):
         cmd += ["--cookies", COOKIES_FILE]
     try:
-<<<<<<< HEAD
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-=======
-        result = run_ytdlp(cmd, url=url, timeout=60)
->>>>>>> 56b4b34 (Merge pull request #6 from rakibulism/codex/analyze-and-fix-function_invocation_failed-error)
         if result.returncode != 0:
             return jsonify({"error": result.stderr.strip().split("\n")[-1]}), 400
 
