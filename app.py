@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 import time
 import logging
 
+from flask import Flask, request, jsonify, send_file, render_template
 from i18n import detect_lang, get_translator
 
 app = Flask(__name__)
